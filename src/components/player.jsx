@@ -1,9 +1,12 @@
 import { useState } from "react"
-export default function Player({ Name, Symbol, isActive}) {
+export default function Player({ Name, Symbol, isActive, onChangeName}) {
     const [CurrName,ChangedName]=useState(Name)
     const [withEdit,Save]=useState(false);
     function handleClickToName(){
         Save(clicked => !clicked)
+        if(withEdit){
+            onChangeName(Symbol,CurrName)
+        }
     }
     function handleChange(event){
         ChangedName(event.target.value)
