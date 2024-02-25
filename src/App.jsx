@@ -36,6 +36,9 @@ function DeriveWinner(gameBoard ,PlayerName){
 
     if(FirstsquareSymbol && FirstsquareSymbol===SecondsquareSymbol && FirstsquareSymbol===ThirdsquareSymbol){
       Winner=PlayerName[FirstsquareSymbol];
+      if(!Winner){
+        Winner=FirstsquareSymbol
+      }
     }
   }
   return Winner
@@ -90,9 +93,9 @@ function App() {
       <div id="game-container">
         <ol id="players" className="highlight-player">
           <Player Name="Player 1" Symbol="X" isActive={ActivePlayer == 'X'} onChangeName={onPlayerName}/>
-          <Player Name="Player 2" Symbol="0" isActive={ActivePlayer == '0'} />
+          <Player Name="Player 2" Symbol="0" isActive={ActivePlayer == '0'} onChangeName={onPlayerName}/>
         </ol>
-        {(Winner || isDraw) && <GameOver winner={Winner} onRestart={RestartMatch}  onChangeName={onPlayerName}/>}
+        {(Winner || isDraw) && <GameOver winner={Winner} onRestart={RestartMatch} />}
         <GameBoard onSelectBox={handlePlayer} board={gameBoard} />
       </div>
       <Log turns={CurrTurn} />
